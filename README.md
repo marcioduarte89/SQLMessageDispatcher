@@ -1,1 +1,1 @@
-# SQLMessageDispatcher
+# SQSMessageDispatcher
