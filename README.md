@@ -4,7 +4,7 @@ SQSMessageDispatcher
 ## Overview
 Simple, easy to use, scalable message dispatcher for AWS SQS for .NET.
 
-I work quite a lot with [SQS](https://aws.amazon.com/sqs/) in my personal projects. SQS is a (cheap enough) fully managed message queuing service which eliminates the complexity and overhead associated with managing and operating message-oriented middleware. Although, I've got tired of writting background processes to process messages out of SQS queues. This code might sound familiar.
+I work quite a lot with [SQS](https://aws.amazon.com/sqs/) in my personal projects. SQS is a (cheap enough) fully managed message queuing service which eliminates the complexity and overhead associated with managing and operating message-oriented middlewares. Yet, I've got tired of writting background processes to process messages out of SQS queues. This code might sound familiar.
 
 ```c#
 while (!stoppingToken.IsCancellationRequested) {
@@ -27,16 +27,16 @@ while (!stoppingToken.IsCancellationRequested) {
 }
 ```
 
-I also work quite a lot with [NSB](https://particular.net/nservicebus) and I really like the way that I only have to be concerned about infrastructure when I first setup and configure my endpoints, apart from that is always "business" as usual - just want to be concerned about features and domain code. So I thought about implementing the same approach on top of SQS API's.
+I also work quite a lot with [NSB](https://particular.net/nservicebus) and I really like the way I only have to be concerned about infrastructure when I first setup and configure my endpoints, apart from that is always "business" as usual - just want to be concerned about features and domain code. So I thought about implementing the same approach on top of SQS API's.
 
 ### How it works:
 The same old HostedService is used to process the messages out of the queue, but we don't have to write or maintain any of its code. We also don't have to add new queues, or extend the hosted service if we want to process new messages types.
 
 ### What it is not:
-The package doesn't try to extend or improve SQS delivery guarantees. Standard queues provide at-least-once delivery, which means that each message is delivered at least once. FIFO queues provide exactly-once processing, which means that each message is delivered once and remains available until a consumer processes it and deletes it. Duplicates are not introduced into the queue. So message handlers should still be idempotent in case the same message is received and delivered for processing more than once (in case of standard queues). 
+The package doesn't try to extend or improve SQS delivery guarantees. Standard queues provide at-least-once delivery, which means that each message is delivered at least once. FIFO queues provide exactly-once processing, which means that each message is delivered once and remains available until a consumer processes it and deletes it. Duplicates are not introduced into the queue. Message handlers should still be idempotent in case the same message is received and delivered for processing more than once (in case of standard queues). 
 
 #### How to configure it:
-A new extension of ```c# IServiceCollection``` was added: ```AddSQSMessageDispatcherHostedService``` and can be configured using ```SQSDispatcherConfiguration```, ex:
+A new extension of ```IServiceCollection``` was added: ```AddSQSMessageDispatcherHostedService``` and can be configured using ```SQSDispatcherConfiguration```, ex:
 
 ```c#
 services.AddSQSMessageDispatcherHostedService(x =>
@@ -47,15 +47,15 @@ services.AddSQSMessageDispatcherHostedService(x =>
 ```
 ##### SQSDispatcherConfiguration properties:
 
-QueueName: The SQS queue name
+```QueueName```: The SQS queue name.
 
-MessagesAssembly: The assembly where the messages are located. Default is the Entry Assembly.
+```MessagesAssembly```: The assembly where the messages are located. Default is the Entry Assembly.
 
-ConcurrencyLevel: Concurrency level to process messages out of the queue. This setting should be used with caution, throwing more threads into processing messages out of the queue doesn't necessarily mean better performance. One should measure what's the optimal number of threads to use. Defaults to 2.
+```ConcurrencyLevel```: Concurrency level to process messages out of the queue. This setting should be used with caution, throwing more threads into processing messages out of the queue doesn't necessarily mean better performance. One should measure what's the optimal number of threads to use. Defaults to 2.
 
-DefaultPolling: [Message polling](https://docs.aws.amazon.com/AWSSimpleQueueService/latest/SQSDeveloperGuide/sqs-short-and-long-polling.html). Defaults is 20 sec.
+```DefaultPolling```: [Message polling](https://docs.aws.amazon.com/AWSSimpleQueueService/latest/SQSDeveloperGuide/sqs-short-and-long-polling.html). Defaults is 20 sec.
 
-DefaultVisibilityTimeout: [Message visibility timeout.](https://docs.aws.amazon.com/AWSSimpleQueueService/latest/SQSDeveloperGuide/sqs-visibility-timeout.html). Defaults to 30 seconds. This value can also be set per message. (see bellow).
+```DefaultVisibilityTimeout```: [Message visibility timeout.](https://docs.aws.amazon.com/AWSSimpleQueueService/latest/SQSDeveloperGuide/sqs-visibility-timeout.html). Defaults to 30 seconds. This value can also be set per message. ([see bellow](#sending-a-message))
 
 ##### appSettings.json:
 ```json
