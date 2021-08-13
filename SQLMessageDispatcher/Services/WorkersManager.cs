@@ -86,6 +86,7 @@
                     if (!_messageQueue.TryDequeue(out var message))
                     {
                         // If there are no messages continue and wait
+                        RaiseReadyToReceiveWorkEvent();
                         continue;
                     }
 
@@ -93,17 +94,18 @@
 
                     if (!processingResult)
                     {
+                        RaiseReadyToReceiveWorkEvent();
                         continue;
                     }
 
                     await DeleteMessage(message);
-
-                    RaiseReadyToReceiveWorkEvent();
                 }
                 catch (Exception ex)
                 {
                     _logger.LogError(ex, "Error has ocurred processing a message");
                 }
+
+                RaiseReadyToReceiveWorkEvent();
             }
 
             _logger.LogInformation($"Exiting thread {Thread.CurrentThread.Name}");

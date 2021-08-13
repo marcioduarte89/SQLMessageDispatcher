@@ -6,8 +6,7 @@ using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
 
-namespace SQLMessageDispatcher.Extensions
-{
+namespace SQLMessageDispatcher.Extensions {
     public static class IAmazonSQLExtensions
     {
         public static async Task<SendMessageResponse> SendMessageAsync<TMessage>(this IAmazonSQS amazonSQS, string queue, TMessage message)
