@@ -37,15 +37,15 @@ namespace SQSMessageDispatcher.Tests.Services
                 ConcurrencyLevel = 1,
                 MessagesAssembly = Assembly.GetExecutingAssembly()
             };
+
+            _sut = new WorkersManager(_workerConfiguration, _mocker.GetMock<IWorkerNotifier>().Object, _mocker.GetMock<IAmazonSQS>().Object, _mocker.GetMock<IServiceProvider>().Object, _mocker.GetMock<ILogger<WorkersManager>>().Object);
+            _sut.ReadyToWork += WorkersManager_ReadyToWork;
         }
 
 
         [Test]
         public void ProcessingWork_WhenProvidingValidMessageToProcess_ShouldProcessMessages()
         {
-            _sut = new WorkersManager(_workerConfiguration, _mocker.GetMock<IWorkerNotifier>().Object, _mocker.GetMock<IAmazonSQS>().Object, _mocker.GetMock<IServiceProvider>().Object, _mocker.GetMock<ILogger<WorkersManager>>().Object);
-            _sut.ReadyToWork += WorkersManager_ReadyToWork;
-
             _sut.AddWork(new List<Message>()
             {
                 new Message()
@@ -74,9 +74,6 @@ namespace SQSMessageDispatcher.Tests.Services
         [Test]
         public void ProcessingWork_WhenProvidingMessageWithoutType_ShouldNotProcessOrDeleteMessage()
         {
-            _sut = new WorkersManager(_workerConfiguration, _mocker.GetMock<IWorkerNotifier>().Object, _mocker.GetMock<IAmazonSQS>().Object, _mocker.GetMock<IServiceProvider>().Object, _mocker.GetMock<ILogger<WorkersManager>>().Object);
-            _sut.ReadyToWork += WorkersManager_ReadyToWork;
-
             _sut.AddWork(new List<Message>()
             {
                 new Message()
@@ -98,8 +95,6 @@ namespace SQSMessageDispatcher.Tests.Services
         public void ProcessingWork_WhenProvidingMessageWithIncreasedVisibilityTimeout_ShouldIncreaseVisibilityTimoutOnProcessingMessage()
         {
             _mocker.GetMock<IAmazonSQS>().Setup(x => x.ChangeMessageVisibilityAsync(It.IsAny<ChangeMessageVisibilityRequest>(), It.IsAny<CancellationToken>())).ReturnsAsync(new ChangeMessageVisibilityResponse() { HttpStatusCode = System.Net.HttpStatusCode.OK });
-            _sut = new WorkersManager(_workerConfiguration, _mocker.GetMock<IWorkerNotifier>().Object, _mocker.GetMock<IAmazonSQS>().Object, _mocker.GetMock<IServiceProvider>().Object, _mocker.GetMock<ILogger<WorkersManager>>().Object);
-            _sut.ReadyToWork += WorkersManager_ReadyToWork;
 
             _sut.AddWork(new List<Message>()
             {
@@ -142,9 +137,6 @@ namespace SQSMessageDispatcher.Tests.Services
         [Test]
         public void ProcessingWork_WhenProvidingMessageTypeWhichDoesNotImplementIMessageButValidAttribute_ShouldNotProcessOrDeleteMessage()
         {
-            _sut = new WorkersManager(_workerConfiguration, _mocker.GetMock<IWorkerNotifier>().Object, _mocker.GetMock<IAmazonSQS>().Object, _mocker.GetMock<IServiceProvider>().Object, _mocker.GetMock<ILogger<WorkersManager>>().Object);
-            _sut.ReadyToWork += WorkersManager_ReadyToWork;
-
             _sut.AddWork(new List<Message>()
             {
                 new Message()

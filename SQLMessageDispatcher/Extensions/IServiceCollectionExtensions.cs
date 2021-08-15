@@ -14,7 +14,6 @@ namespace SQLMessageDispatcher.Extensions
             serviceCollection.AddHostedService<SQSMessageDispatcherHostedService>().Configure(setupAction);
             serviceCollection.AddSingleton(DependencyConfiguration.ReceiveMessageRequestBuilder);
             serviceCollection.AddSingleton(DependencyConfiguration.WorkerMessageConfigurationBuilder);
-            serviceCollection.AddSingleton<IWorkerNotifier>(DependencyConfiguration.WorkerNotifierBuilder);
             serviceCollection.AddSingleton<IMessageDispatcherService>(DependencyConfiguration.MessageDispatcherBuilder);
             serviceCollection.AddSingleton<IWorkersManager>(DependencyConfiguration.WorkersManagerBuilder);
             return serviceCollection;

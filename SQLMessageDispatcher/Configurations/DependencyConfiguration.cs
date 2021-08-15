@@ -35,7 +35,7 @@ namespace SQLMessageDispatcher.Configurations
             var receiveMessageRequest = serviceProvider.GetService<ReceiveMessageRequest>();
             var logger = serviceProvider.GetService<ILogger<MessageDispatcherService>>();
 
-            return new MessageDispatcherService(workersManager, amazonSQS, receiveMessageRequest, logger);
+            return new MessageDispatcherService(workersManager, amazonSQS, WorkerNotifierBuilder, receiveMessageRequest, logger);
         };
 
         public static Func<IServiceProvider, WorkerMessageConfiguration> WorkerMessageConfigurationBuilder = (serviceProvider) =>
@@ -54,12 +54,11 @@ namespace SQLMessageDispatcher.Configurations
         {
             var workerMessageConfiguration = serviceProvider.GetService<WorkerMessageConfiguration>();
             var amazonSQS = serviceProvider.GetService<IAmazonSQS>();
-            var workerNotifier = serviceProvider.GetService<IWorkerNotifier>();
             var logger = serviceProvider.GetService<ILogger<WorkersManager>>();
 
-            return new WorkersManager(workerMessageConfiguration, workerNotifier, amazonSQS, serviceProvider, logger);
+            return new WorkersManager(workerMessageConfiguration, WorkerNotifierBuilder, amazonSQS, serviceProvider, logger);
         };
 
-        public static WorkerNotifier WorkerNotifierBuilder => new WorkerNotifier(new AutoResetEvent(false));
+        private static WorkerNotifier WorkerNotifierBuilder => new WorkerNotifier(new AutoResetEvent(false));
     }
 }

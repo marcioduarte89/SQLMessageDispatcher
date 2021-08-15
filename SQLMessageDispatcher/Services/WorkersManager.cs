@@ -75,7 +75,7 @@
                 try
                 {
                     // Waits for work..
-                    _workerNotifier.WaitForWork();
+                    _workerNotifier.PauseWork();
 
                     // If after waiting, there has been the cancellation request or a forced request for abortion, exit
                     if (_stoppingTokenSource.Token.IsCancellationRequested)

@@ -4,9 +4,9 @@ namespace SQLMessageDispatcher.Interfaces
 {
     public interface IWorkerNotifier
     {
-        bool WaitForWork();
+        bool PauseWork();
 
-        bool WaitForWork(TimeSpan timeout);
+        bool PauseWork(TimeSpan timeout);
 
         bool ResumeWork();
     }

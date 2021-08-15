@@ -14,12 +14,12 @@
         }
 
 
-        public bool WaitForWork()
+        public bool PauseWork()
         {
             return _mainHandle.WaitOne();
         }
 
-        public bool WaitForWork(TimeSpan timeout)
+        public bool PauseWork(TimeSpan timeout)
         {
             return _mainHandle.WaitOne(timeout);
         }
