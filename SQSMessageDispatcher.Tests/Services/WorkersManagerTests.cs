@@ -130,7 +130,7 @@ namespace SQSMessageDispatcher.Tests.Services
             _sut.FinishWork();
             EnsureWorkersFinishedWork(_sut);
 
-            //_mocker.GetMock<TestMessageHandler>().Verify(x => x.Handle(It.IsAny<TestMessage>(), It.IsAny<CancellationToken>()), Times.Once);
+            _mocker.GetMock<TestMessageHandler>().Verify(x => x.Handle(It.IsAny<TestMessage>(), It.IsAny<CancellationToken>()), Times.Once);
             _mocker.GetMock<IAmazonSQS>().Verify(x => x.ChangeMessageVisibilityAsync(It.IsAny<ChangeMessageVisibilityRequest>(), It.IsAny<CancellationToken>()), Times.Once);
             _mocker.GetMock<IAmazonSQS>().Verify(x => x.DeleteMessageAsync(It.IsAny<DeleteMessageRequest>(), It.IsAny<CancellationToken>()), Times.Once);
         }

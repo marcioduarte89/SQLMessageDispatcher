@@ -17,9 +17,9 @@ steps:
 - script: dotnet build --configuration $(buildConfiguration)
   displayName: 'Dotnet Build $(buildConfiguration)'
   
-- task: DotNetCoreCLI@2
-  displayName: "Run Unit Tests"
-  inputs:
-    command: test
-    arguments: '--configuration $(buildConfiguration) --no-build'
-    projects: '**/*Tests/*.csproj'  
+# - task: DotNetCoreCLI@2
+  # displayName: "Run Unit Tests"
+  # inputs:
+    # command: test
+    # arguments: '--configuration $(buildConfiguration) --no-build'
+    # projects: '**/*Tests/*.csproj'  
