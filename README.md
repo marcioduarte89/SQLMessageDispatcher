@@ -36,6 +36,9 @@ The same old HostedService is used to process the messages out of the queue, but
 The package doesn't try to extend or improve SQS delivery guarantees. Standard queues provide at-least-once delivery, which means that each message is delivered at least once. FIFO queues provide exactly-once processing, which means that each message is delivered once and remains available until a consumer processes it and deletes it. Duplicates are not introduced into the queue. Message handlers should still be idempotent in case the same message is received and delivered for processing more than once (in case of standard queues). 
 
 #### How to configure it:
+
+You can just install it using:  ```Install-Package SQSMessageDispatcher -Version 0.1.0```
+
 A new extension of ```IServiceCollection``` was added: ```AddSQSMessageDispatcherHostedService``` and can be configured using ```SQSDispatcherConfiguration```, ex:
 
 ```c#
