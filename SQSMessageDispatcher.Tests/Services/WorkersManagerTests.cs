@@ -64,7 +64,7 @@ namespace SQSMessageDispatcher.Tests.Services
 
             _mainHandle.WaitOne();
             _sut.FinishWork();
-            Thread.Sleep(TimeSpan.FromSeconds(1));
+            Thread.Sleep(TimeSpan.FromSeconds(2));
 
             _mocker.GetMock<TestMessageHandler>().Verify(x => x.Handle(It.IsAny<TestMessage>(), It.IsAny<CancellationToken>()), Times.Once);
             _mocker.GetMock<IAmazonSQS>().Verify(x => x.ChangeMessageVisibilityAsync(It.IsAny<ChangeMessageVisibilityRequest>(), It.IsAny<CancellationToken>()), Times.Never);
@@ -84,7 +84,7 @@ namespace SQSMessageDispatcher.Tests.Services
 
             _mainHandle.WaitOne();
             _sut.FinishWork();
-            Thread.Sleep(TimeSpan.FromSeconds(1));
+            Thread.Sleep(TimeSpan.FromSeconds(2));
 
             _mocker.GetMock<TestMessageHandler>().Verify(x => x.Handle(It.IsAny<TestMessage>(), It.IsAny<CancellationToken>()), Times.Never);
             _mocker.GetMock<IAmazonSQS>().Verify(x => x.ChangeMessageVisibilityAsync(It.IsAny<ChangeMessageVisibilityRequest>(), It.IsAny<CancellationToken>()), Times.Never);
@@ -127,7 +127,7 @@ namespace SQSMessageDispatcher.Tests.Services
 
             _mainHandle.WaitOne();
             _sut.FinishWork();
-            Thread.Sleep(TimeSpan.FromSeconds(1));
+            Thread.Sleep(TimeSpan.FromSeconds(2));
 
             _mocker.GetMock<TestMessageHandler>().Verify(x => x.Handle(It.IsAny<TestMessage>(), It.IsAny<CancellationToken>()), Times.Once);
             _mocker.GetMock<IAmazonSQS>().Verify(x => x.ChangeMessageVisibilityAsync(It.IsAny<ChangeMessageVisibilityRequest>(), It.IsAny<CancellationToken>()), Times.Once);
@@ -159,7 +159,7 @@ namespace SQSMessageDispatcher.Tests.Services
 
             _mainHandle.WaitOne();
             _sut.FinishWork();
-            Thread.Sleep(TimeSpan.FromSeconds(1));
+            Thread.Sleep(TimeSpan.FromSeconds(2));
 
             _mocker.GetMock<TestMessageHandler>().Verify(x => x.Handle(It.IsAny<TestMessage>(), It.IsAny<CancellationToken>()), Times.Never);
             _mocker.GetMock<IAmazonSQS>().Verify(x => x.ChangeMessageVisibilityAsync(It.IsAny<ChangeMessageVisibilityRequest>(), It.IsAny<CancellationToken>()), Times.Never);
@@ -200,7 +200,7 @@ namespace SQSMessageDispatcher.Tests.Services
 
             _mainHandle.WaitOne();
             _sut.FinishWork();
-            Thread.Sleep(TimeSpan.FromSeconds(1));
+            Thread.Sleep(TimeSpan.FromSeconds(2));
 
             _mocker.GetMock<TestMessageHandler>().Verify(x => x.Handle(It.IsAny<TestMessage>(), It.IsAny<CancellationToken>()), Times.Never);
             _mocker.GetMock<IAmazonSQS>().Verify(x => x.ChangeMessageVisibilityAsync(It.IsAny<ChangeMessageVisibilityRequest>(), It.IsAny<CancellationToken>()), Times.Never);
