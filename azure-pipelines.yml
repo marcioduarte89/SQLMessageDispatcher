@@ -25,7 +25,6 @@ steps:
     # projects: '**/*Tests/*.csproj'  
 
 - task: DotNetCoreCLI@2
-  #condition: and(succeeded(), eq(variables['Build.SourceBranch'], 'refs/heads/main'))
   displayName: "Nuget pack SQSMessageDispatcher"
   inputs:
     command: 'pack'
@@ -38,7 +37,6 @@ steps:
 
 - task: NuGetCommand@2
   displayName: "Nuget push to Nuget.org"
-  #condition: and(succeeded(), eq(variables['Build.SourceBranch'], 'refs/heads/main'))
   inputs:
     command: 'push'
     packagesToPush: '$(Build.ArtifactStagingDirectory)/**/*.nupkg;!$(Build.ArtifactStagingDirectory)/**/*.symbols.nupkg'
