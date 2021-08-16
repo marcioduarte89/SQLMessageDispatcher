@@ -1,7 +1,7 @@
 ﻿using System.Threading;
 using System.Threading.Tasks;
 
-namespace SQLMessageDispatcher.Interfaces
+namespace SQSMessageDispatcher.Interfaces
 {
     /// <summary>
     /// Interface to Handle Messages

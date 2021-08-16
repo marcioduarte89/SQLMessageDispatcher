@@ -5,7 +5,8 @@ using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
-using SQLMessageDispatcher.Interfaces;
+using SQSMessageDispatcher.Extensions;
+using SQSMessageDispatcher.Interfaces;
 using System.Reflection;
 
 namespace API
@@ -22,11 +23,14 @@ namespace API
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
-
             services.AddControllers();
+            services.AddSQSMessageDispatcherHostedService(x =>
+            {
+                x.ConcurrencyLevel = 5;
+                x.QueueName = Configuration.GetValue<string>("AWS:Queue");
+            });
             services.AddAWSService<IAmazonSQS>(Configuration.GetAWSOptions());
         }
-
 
         /// <summary>
         /// Configure Container will be called after running ConfigureServices

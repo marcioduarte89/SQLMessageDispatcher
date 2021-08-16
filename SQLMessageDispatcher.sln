@@ -3,7 +3,7 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 16
 VisualStudioVersion = 16.0.31229.75
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SQLMessageDispatcher", "SQLMessageDispatcher\SQLMessageDispatcher.csproj", "{39EB3EFC-B710-407D-BF89-776EB9D7DF6B}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SQSMessageDispatcher", "SQLMessageDispatcher\SQSMessageDispatcher.csproj", "{39EB3EFC-B710-407D-BF89-776EB9D7DF6B}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "API", "API\API.csproj", "{9C7CA016-6B88-4A4B-A5C2-33EB189AFF5A}"
 EndProject
@@ -11,6 +11,8 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution 
 	ProjectSection(SolutionItems) = preProject
 		.editorconfig = .editorconfig
 	EndProjectSection
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SQSMessageDispatcher.Tests", "SQSMessageDispatcher.Tests\SQSMessageDispatcher.Tests.csproj", "{37C6B73D-9AAF-463C-968D-57CC7955F690}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -26,6 +28,10 @@ Global
 		{9C7CA016-6B88-4A4B-A5C2-33EB189AFF5A}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{9C7CA016-6B88-4A4B-A5C2-33EB189AFF5A}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{9C7CA016-6B88-4A4B-A5C2-33EB189AFF5A}.Release|Any CPU.Build.0 = Release|Any CPU
+		{37C6B73D-9AAF-463C-968D-57CC7955F690}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{37C6B73D-9AAF-463C-968D-57CC7955F690}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{37C6B73D-9AAF-463C-968D-57CC7955F690}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{37C6B73D-9AAF-463C-968D-57CC7955F690}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

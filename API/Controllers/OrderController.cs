@@ -2,7 +2,8 @@
 using API.Messages;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Configuration;
-using SQLMessageDispatcher.Extensions;
+using Newtonsoft.Json;
+using SQSMessageDispatcher.Extensions;
 using System.Threading.Tasks;
 
 namespace API.Controllers
@@ -26,11 +27,27 @@ namespace API.Controllers
         [HttpPost]
         public async Task Post()
         {
-			await amazonSqs.SendMessageAsync(_queueName, new PlaceOrder()
-			{
-				PropertyOne = "Property one",
-				PropertyTwo = "Property two",
-			});
+            for (int i = 0; i < 100; i++)
+            {
+                //var sendMessageRequest = new SQSMessageDispatcher.Models.SendMessageRequest()
+                //{
+                //    VisibilityTimeout = 1800,
+                //    QueueUrl = _queueName,
+                //    MessageBody = JsonConvert.SerializeObject(new PlaceOrder()
+                //    {
+                //        PropertyOne = "Property one",
+                //        PropertyTwo = "Property two",
+                //    })
+                //};
+
+                // await amazonSqs.SendMessageAsync<PlaceOrder>(sendMessageRequest);
+
+                await amazonSqs.SendMessageAsync(_queueName, new PlaceOrder()
+                {
+                    PropertyOne = "Property one",
+                    PropertyTwo = "Property two",
+                });
+            }
         }
     }
 }

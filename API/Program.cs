@@ -1,7 +1,7 @@
 using Autofac.Extensions.DependencyInjection;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Hosting;
-using SQLMessageDispatcher.Extensions;
+using SQSMessageDispatcher.Extensions;
 
 namespace API
 {
@@ -18,7 +18,6 @@ namespace API
                 .ConfigureWebHostDefaults(webBuilder =>
                 {
                     webBuilder.UseStartup<Startup>();
-                })
-            .AddSQSMessageDispatcherHostedService();
+                });
     }
 }

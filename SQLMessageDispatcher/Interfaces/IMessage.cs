@@ -1,4 +1,4 @@
-﻿namespace SQLMessageDispatcher.Interfaces
+﻿namespace SQSMessageDispatcher.Interfaces
 {
     /// <summary>
     /// Marker interface for Messages
