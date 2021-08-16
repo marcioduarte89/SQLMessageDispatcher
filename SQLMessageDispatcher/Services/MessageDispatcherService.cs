@@ -16,7 +16,6 @@ namespace SQLMessageDispatcher.Services
         private readonly IWorkerNotifier _workerNotifier;
         private readonly ReceiveMessageRequest _receiveMessageRequest;
         private readonly ILogger<MessageDispatcherService> _logger;
-        private static EventWaitHandle _workersReadyHandle = new AutoResetEvent(false);
 
         public MessageDispatcherService(
             IWorkersManager workersManager, 

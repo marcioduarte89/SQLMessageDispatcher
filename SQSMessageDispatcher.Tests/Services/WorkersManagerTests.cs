@@ -12,6 +12,7 @@ using SQLMessageDispatcher.Services;
 using SQSMessageDispatcher.Tests.Helpers;
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Reflection;
 using System.Threading;
 
@@ -64,8 +65,8 @@ namespace SQSMessageDispatcher.Tests.Services
 
             _mainHandle.WaitOne();
             _sut.FinishWork();
-            Thread.Sleep(TimeSpan.FromSeconds(2));
-
+            EnsureWorkersFinishedWork(_sut);
+            
             _mocker.GetMock<TestMessageHandler>().Verify(x => x.Handle(It.IsAny<TestMessage>(), It.IsAny<CancellationToken>()), Times.Once);
             _mocker.GetMock<IAmazonSQS>().Verify(x => x.ChangeMessageVisibilityAsync(It.IsAny<ChangeMessageVisibilityRequest>(), It.IsAny<CancellationToken>()), Times.Never);
             _mocker.GetMock<IAmazonSQS>().Verify(x => x.DeleteMessageAsync(It.IsAny<DeleteMessageRequest>(), It.IsAny<CancellationToken>()), Times.Once);
@@ -84,7 +85,7 @@ namespace SQSMessageDispatcher.Tests.Services
 
             _mainHandle.WaitOne();
             _sut.FinishWork();
-            Thread.Sleep(TimeSpan.FromSeconds(2));
+            EnsureWorkersFinishedWork(_sut);
 
             _mocker.GetMock<TestMessageHandler>().Verify(x => x.Handle(It.IsAny<TestMessage>(), It.IsAny<CancellationToken>()), Times.Never);
             _mocker.GetMock<IAmazonSQS>().Verify(x => x.ChangeMessageVisibilityAsync(It.IsAny<ChangeMessageVisibilityRequest>(), It.IsAny<CancellationToken>()), Times.Never);
@@ -127,7 +128,7 @@ namespace SQSMessageDispatcher.Tests.Services
 
             _mainHandle.WaitOne();
             _sut.FinishWork();
-            Thread.Sleep(TimeSpan.FromSeconds(2));
+            EnsureWorkersFinishedWork(_sut);
 
             _mocker.GetMock<TestMessageHandler>().Verify(x => x.Handle(It.IsAny<TestMessage>(), It.IsAny<CancellationToken>()), Times.Once);
             _mocker.GetMock<IAmazonSQS>().Verify(x => x.ChangeMessageVisibilityAsync(It.IsAny<ChangeMessageVisibilityRequest>(), It.IsAny<CancellationToken>()), Times.Once);
@@ -159,7 +160,7 @@ namespace SQSMessageDispatcher.Tests.Services
 
             _mainHandle.WaitOne();
             _sut.FinishWork();
-            Thread.Sleep(TimeSpan.FromSeconds(2));
+            EnsureWorkersFinishedWork(_sut);
 
             _mocker.GetMock<TestMessageHandler>().Verify(x => x.Handle(It.IsAny<TestMessage>(), It.IsAny<CancellationToken>()), Times.Never);
             _mocker.GetMock<IAmazonSQS>().Verify(x => x.ChangeMessageVisibilityAsync(It.IsAny<ChangeMessageVisibilityRequest>(), It.IsAny<CancellationToken>()), Times.Never);
@@ -200,7 +201,7 @@ namespace SQSMessageDispatcher.Tests.Services
 
             _mainHandle.WaitOne();
             _sut.FinishWork();
-            Thread.Sleep(TimeSpan.FromSeconds(2));
+            EnsureWorkersFinishedWork(_sut);
 
             _mocker.GetMock<TestMessageHandler>().Verify(x => x.Handle(It.IsAny<TestMessage>(), It.IsAny<CancellationToken>()), Times.Never);
             _mocker.GetMock<IAmazonSQS>().Verify(x => x.ChangeMessageVisibilityAsync(It.IsAny<ChangeMessageVisibilityRequest>(), It.IsAny<CancellationToken>()), Times.Never);
@@ -210,6 +211,13 @@ namespace SQSMessageDispatcher.Tests.Services
         private void WorkersManager_ReadyToWork(object sender, EventArgs e)
         {
             _mainHandle.Set();
+        }
+
+        private void EnsureWorkersFinishedWork(WorkersManager workersManager)
+        {
+            var threadList = workersManager.GetType().GetField("_threadList", BindingFlags.NonPublic | BindingFlags.Instance).GetValue(workersManager) as Thread[];
+
+            while (threadList.Any(x => x.IsAlive)) { }
         }
     }
 }
