@@ -1,12 +1,12 @@
 ﻿using Amazon.SQS;
 using Amazon.SQS.Model;
 using Newtonsoft.Json;
-using SQLMessageDispatcher.Helpers;
+using SQSMessageDispatcher.Helpers;
 using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
 
-namespace SQLMessageDispatcher.Extensions {
+namespace SQSMessageDispatcher.Extensions {
     public static class IAmazonSQLExtensions
     {
         public static async Task<SendMessageResponse> SendMessageAsync<TMessage>(this IAmazonSQS amazonSQS, string queue, TMessage message)

@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace SQLMessageDispatcher.Interfaces
+namespace SQSMessageDispatcher.Interfaces
 {
     public interface IWorkerNotifier
     {

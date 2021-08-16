@@ -1,12 +1,12 @@
-﻿namespace SQLMessageDispatcher.Services
+﻿namespace SQSMessageDispatcher.Services
 {
     using Amazon.SQS;
     using Amazon.SQS.Model;
     using Microsoft.Extensions.Logging;
     using Newtonsoft.Json;
-    using SQLMessageDispatcher.Helpers;
-    using SQLMessageDispatcher.Interfaces;
-    using SQLMessageDispatcher.Models;
+    using SQSMessageDispatcher.Helpers;
+    using SQSMessageDispatcher.Interfaces;
+    using SQSMessageDispatcher.Models;
     using System;
     using System.Collections.Concurrent;
     using System.Collections.Generic;

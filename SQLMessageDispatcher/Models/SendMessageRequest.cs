@@ -1,4 +1,4 @@
-﻿namespace SQLMessageDispatcher.Models
+﻿namespace SQSMessageDispatcher.Models
 {
     public class SendMessageRequest : Amazon.SQS.Model.SendMessageRequest
     {

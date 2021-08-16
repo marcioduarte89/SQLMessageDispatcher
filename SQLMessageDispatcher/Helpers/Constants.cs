@@ -1,4 +1,4 @@
-﻿namespace SQLMessageDispatcher.Helpers
+﻿namespace SQSMessageDispatcher.Helpers
 {
     public static class Constants
     {

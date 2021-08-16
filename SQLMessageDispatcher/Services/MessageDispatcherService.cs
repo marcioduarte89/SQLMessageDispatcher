@@ -2,12 +2,12 @@
 using Amazon.SQS;
 using Amazon.SQS.Model;
 using Microsoft.Extensions.Logging;
-using SQLMessageDispatcher.Interfaces;
+using SQSMessageDispatcher.Interfaces;
 using System;
 using System.Threading;
 using System.Threading.Tasks;
 
-namespace SQLMessageDispatcher.Services
+namespace SQSMessageDispatcher.Services
 {
     public class MessageDispatcherService : IMessageDispatcherService
     {

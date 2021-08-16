@@ -1,11 +1,11 @@
 ﻿using Microsoft.Extensions.DependencyInjection;
-using SQLMessageDispatcher.Configurations;
-using SQLMessageDispatcher.HostedService;
-using SQLMessageDispatcher.Interfaces;
-using SQLMessageDispatcher.Models;
+using SQSMessageDispatcher.Configurations;
+using SQSMessageDispatcher.HostedService;
+using SQSMessageDispatcher.Interfaces;
+using SQSMessageDispatcher.Models;
 using System;
 
-namespace SQLMessageDispatcher.Extensions
+namespace SQSMessageDispatcher.Extensions
 {
     public static class IServiceCollectionExtensions
     {

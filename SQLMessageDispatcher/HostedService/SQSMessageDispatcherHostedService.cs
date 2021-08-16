@@ -1,9 +1,9 @@
 ﻿using Microsoft.Extensions.Hosting;
-using SQLMessageDispatcher.Interfaces;
+using SQSMessageDispatcher.Interfaces;
 using System.Threading;
 using System.Threading.Tasks;
 
-namespace SQLMessageDispatcher.HostedService
+namespace SQSMessageDispatcher.HostedService
 {
     public class SQSMessageDispatcherHostedService : BackgroundService
     {

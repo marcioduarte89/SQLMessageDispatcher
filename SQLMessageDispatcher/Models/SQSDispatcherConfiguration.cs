@@ -1,6 +1,6 @@
 ﻿using System.Reflection;
 
-namespace SQLMessageDispatcher.Models
+namespace SQSMessageDispatcher.Models
 {
     public class SQSDispatcherConfiguration
     {

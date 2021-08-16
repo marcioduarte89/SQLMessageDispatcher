@@ -1,6 +1,6 @@
-﻿namespace SQLMessageDispatcher.Services
+﻿namespace SQSMessageDispatcher.Services
 {
-    using SQLMessageDispatcher.Interfaces;
+    using SQSMessageDispatcher.Interfaces;
     using System;
     using System.Threading;
 

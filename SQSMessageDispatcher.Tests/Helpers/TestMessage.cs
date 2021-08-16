@@ -1,6 +1,6 @@
 ﻿namespace SQSMessageDispatcher.Tests.Helpers
 {
-    using SQLMessageDispatcher.Interfaces;
+    using SQSMessageDispatcher.Interfaces;
     using System.Threading;
     using System.Threading.Tasks;
 

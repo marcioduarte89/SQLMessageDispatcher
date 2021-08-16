@@ -1,4 +1,4 @@
-﻿using SQLMessageDispatcher.Interfaces;
+﻿using SQSMessageDispatcher.Interfaces;
 
 namespace API.Messages
 {

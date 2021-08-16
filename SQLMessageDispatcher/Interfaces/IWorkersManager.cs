@@ -2,7 +2,7 @@
 using System;
 using System.Collections.Generic;
 
-namespace SQLMessageDispatcher.Interfaces
+namespace SQSMessageDispatcher.Interfaces
 {
     public interface IWorkersManager
     {

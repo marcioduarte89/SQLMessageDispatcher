@@ -3,7 +3,7 @@ using API.Messages;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Configuration;
 using Newtonsoft.Json;
-using SQLMessageDispatcher.Extensions;
+using SQSMessageDispatcher.Extensions;
 using System.Threading.Tasks;
 
 namespace API.Controllers
@@ -29,7 +29,7 @@ namespace API.Controllers
         {
             for (int i = 0; i < 100; i++)
             {
-                //var sendMessageRequest = new SQLMessageDispatcher.Models.SendMessageRequest()
+                //var sendMessageRequest = new SQSMessageDispatcher.Models.SendMessageRequest()
                 //{
                 //    VisibilityTimeout = 1800,
                 //    QueueUrl = _queueName,

@@ -1,7 +1,7 @@
 ﻿namespace API.Handlers
 {
     using API.Messages;
-    using SQLMessageDispatcher.Interfaces;
+    using SQSMessageDispatcher.Interfaces;
     using System;
     using System.Threading;
     using System.Threading.Tasks;

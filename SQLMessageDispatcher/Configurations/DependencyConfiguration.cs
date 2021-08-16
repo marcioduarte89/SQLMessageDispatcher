@@ -3,15 +3,15 @@ using Amazon.SQS.Model;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
 using Microsoft.Extensions.Options;
-using SQLMessageDispatcher.Helpers;
-using SQLMessageDispatcher.Interfaces;
-using SQLMessageDispatcher.Models;
-using SQLMessageDispatcher.Services;
+using SQSMessageDispatcher.Helpers;
+using SQSMessageDispatcher.Interfaces;
+using SQSMessageDispatcher.Models;
+using SQSMessageDispatcher.Services;
 using System;
 using System.Collections.Generic;
 using System.Threading;
 
-namespace SQLMessageDispatcher.Configurations
+namespace SQSMessageDispatcher.Configurations
 {
     internal static class DependencyConfiguration
     {

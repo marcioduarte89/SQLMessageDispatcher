@@ -5,8 +5,8 @@ using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
-using SQLMessageDispatcher.Extensions;
-using SQLMessageDispatcher.Interfaces;
+using SQSMessageDispatcher.Extensions;
+using SQSMessageDispatcher.Interfaces;
 using System.Reflection;
 
 namespace API
